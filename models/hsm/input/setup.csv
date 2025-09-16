@@ -17,8 +17,8 @@ canada_switch,TRUE
 ngp_switch,TRUE
 run_every_itr_switch,TRUE
 steo_benchmark_adj_switch,TRUE
-debug_switch,FALSE
-hsm_var_debug_switch,FALSE
+debug_switch,TRUE
+hsm_var_debug_switch,TRUE
 discounting,discounting.csv
 mapping,mapping.csv
 hist_wells,hist_wells.csv

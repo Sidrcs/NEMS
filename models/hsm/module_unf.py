@@ -163,9 +163,6 @@ class Module:
         Module
 
         """
-
-        
-
         ###Input and output paths
 
         #Input Paths
@@ -203,7 +200,7 @@ class Module:
 
         ###Switches
         self.integrated_switch          = False     #False means standalone run, True means integrated run
-        self.steo_benchmark_adj_switch      = False     #False means steo benchmarks are read in, True means STEO benchmark factors are calculated
+        self.steo_benchmark_adj_switch  = False     #False means steo benchmarks are read in, True means STEO benchmark factors are calculated
         self.run_every_itr_switch       = False     #False means only run itrs 1, fcrl = 1 & ncrl = 1, True means run every iteration
         self.debug_switch               = False     #False means local debug files are not printed out, True means local debug files are printed out
         self.low_price_case             = False     #Flag for if run is a low price case, False means off, True means on
@@ -327,6 +324,12 @@ class Module:
         self.rest_ogngprd_nofed         = pd.DataFrame()  #ogsmout:     REAL OGNGPRD_NONFED(MNL48T, MNUMYR) !  Natural gas  non-federal
         self.rest_pelin                 = pd.DataFrame()  #mpblk:       REAL MPBLK_PELIN(MNUMCR,MNUMYR)! Purchased Electricity - Industrial
 
+    def __repr__(self):
+        """Return an module object representation string."""
+        address = hex(id(self))
+        msgs = [f"\n   {k}={v}" for k, v in self.__dict__.items()]
+        msg = ", ".join(msgs)
+        return f"<HSM module object at {address}>: {msg}"
 
     def setup(self, standalone_directory,
               integrated_directory,
@@ -359,7 +362,21 @@ class Module:
             Filepath for integrated HSM run input directory
 
         setup_filename : str
-            setup.txt filename
+            setup.csv filename
+
+        year: int
+            Analysis year
+        
+        pyfiler1: str
+            Unable to understand what a pyfiler is
+        
+        cycle: str
+            Provide a name for the run. If the name is set as 'no load on cycle'
+            Then the cycle name is set as 'nan'
+        
+        scedes: str
+            ?
+
 
 
         Returns
@@ -469,41 +486,41 @@ class Module:
             self.current_cycle = cycle
 
 
-        ###Assign directories for stanalone vs. integrated run based on where setup.csv is located
+        ###Assign directories for standlone vs. integrated run based on where setup.csv is located
         file_exists = os.path.exists(integrated_input_path + 'setup.csv')
         self.logger.info('parent input path: ' + integrated_directory)
         if file_exists:
             self.main_directory             = integrated_directory
-            self.input_path                 = integrated_directory + 'hsm\\input\\'
-            self.output_path                = integrated_directory + 'hsm\\debug\\'
-            self.hsm_var_output_path        = integrated_directory + 'hsm\\intermediate_tables\\'
+            self.input_path                 = integrated_directory + 'hsm/input/'
+            self.output_path                = integrated_directory + 'hsm/debug/'
+            self.hsm_var_output_path        = integrated_directory + 'hsm/intermediate_tables/'
             self.integrated_switch          = True
             self.logger.info('INTEGRATED SWITCH ON')
 
         else:
             self.main_directory             = standalone_directory
-            self.input_path                 = standalone_directory + 'input\\'
-            self.output_path                = standalone_directory + 'debug\\'
-            self.hsm_var_output_path        = standalone_directory + 'intermediate_tables\\'
+            self.input_path                 = standalone_directory + 'input/'
+            self.output_path                = standalone_directory + 'debug/'
+            self.hsm_var_output_path        = standalone_directory + 'intermediate_tables/'
             self.integrated_switch          = False
             self.logger.info('INTEGRATED SWITCH OFF')
 
 
         #Assign other input paths
-        self.hist_input_path            = self.input_path + 'history\\'
-        self.steo_input_path            = self.input_path + 'steo\\'
-        self.onshore_input_path         = self.input_path + 'onshore\\'
-        self.offshore_input_path        = self.input_path + 'offshore\\'
-        self.alaska_input_path          = self.input_path + 'alaska\\'
-        self.canada_input_path          = self.input_path + 'canada\\'
-        self.ngp_input_path             = self.input_path + 'ngp\\'
+        self.hist_input_path            = self.input_path + 'history/'
+        self.steo_input_path            = self.input_path + 'steo/'
+        self.onshore_input_path         = self.input_path + 'onshore/'
+        self.offshore_input_path        = self.input_path + 'offshore/'
+        self.alaska_input_path          = self.input_path + 'alaska/'
+        self.canada_input_path          = self.input_path + 'canada/'
+        self.ngp_input_path             = self.input_path + 'ngp/'
 
         ### Instantiate Pyfiler
         if self.integrated_switch == True:
             self.pyfiler1 = pyfiler1
         else:
-            import pyfiler1
-            self.pyfiler1 = pyfiler1
+            # import pyfiler1
+            self.pyfiler1 = None
 
 
         #Assign base model parameters
@@ -1326,4 +1343,23 @@ class Module:
                 pass
 
         pass
+
+
+if __name__ == "__main__":
+    hsm_module = Module()
+
+    HOME = '/Users/cramavaj/Desktop/ceser/NEMS/models/hsm/'
+    hsm_module.main_directory = HOME
+    hsm_module.input_path = os.path.join(HOME,'input')
+    hsm_module.hist_input_path = os.path.join(HOME,'input/history')
+    hsm_module.steo_input_path = os.path.join(HOME,'input/steo')
+    hsm_module.onshore_input_path = os.path.join(HOME,'input/onshore')
+    hsm_module.offshore_input_path = os.path.join(HOME,'input/offshore')
+    hsm_module.alaska_input_path = os.path.join(HOME,'input/alaska')
+    hsm_module.canada_input_path = os.path.join(HOME,'input/canada')
+    hsm_module.ngp_input_path = os.path.join(HOME,'input/ngp')
+    hsm_module.hsm_var_output_path = os.path.join(HOME,'input/intermediate_tables')
+    hsm_module.output_path = os.path.join(HOME,'output')
+
+
 

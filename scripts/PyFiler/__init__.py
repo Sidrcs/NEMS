@@ -32,16 +32,16 @@ def PyFilerFileCheck (NEMSDIR, reqfile):
     if NEMSDIR[-4:] == 'NEMS':
         with open(PYFILER_LOG, "a") as a:
             a.write('NEMS if PATH: ' + NEMSDIR)
-        file_exists = os.path.exists(NEMSDIR + '\\scripts\\PyFiler\\input\\dict.txt'), os.path.exists(NEMSDIR + '\\scripts\\PyFiler\\input\\varlist.txt'), True
+        file_exists = os.path.exists(NEMSDIR + '/scripts/PyFiler/input/dict.txt'), os.path.exists(NEMSDIR + '/scripts/PyFiler/input/varlist.txt'), True
     else:
         with open(PYFILER_LOG, "a") as a:
             a.write('Non-NEMS if path: ' + NEMSDIR)
-        file_exists = os.path.exists(os.getcwd()+'\\PyFiler\\input\\dict.txt'), os.path.exists(os.getcwd()+'\\PyFiler\\input\\varlist.txt'), False
+        file_exists = os.path.exists(os.getcwd()+'/PyFiler/input/dict.txt'), os.path.exists(os.getcwd()+'/PyFiler/input/varlist.txt'), False
     for ii in range(len(file_exists)):
         if file_exists[ii] == False:
             if NEMSDIR[-4:] =='NEMS':
                 # print('NEMS Try If')
-                shutil.copy(NEMSDIR+'\\input\\'+reqfile[ii],NEMSDIR+'\\scripts\\PyFiler\\input\\'+reqfile[ii])
+                shutil.copy(NEMSDIR+'/input/'+reqfile[ii],NEMSDIR+'/scripts/PyFiler/input/'+reqfile[ii])
                 if reqfile[ii] == 'FILELIST':
                     break
             elif reqfile[ii] == 'FILELIST':
@@ -49,10 +49,10 @@ def PyFilerFileCheck (NEMSDIR, reqfile):
                     a.write('FILELIST location: ' + os.getcwd())
                 # Looking for FILELIST in PARNEMS Folder Structure
                 if os.getcwd()[-2:] == 'p1':
-                    shutil.copy(os.getcwd()+"\\" + reqfile[ii],os.path.abspath(os.path.join(os.getcwd(),".."))+'\\PyFiler\\'+reqfile[ii])
+                    shutil.copy(os.getcwd()+"/" + reqfile[ii],os.path.abspath(os.path.join(os.getcwd(),".."))+'/PyFiler/'+reqfile[ii])
                 # Looking for FILELIST in JOGNEMS Folder Structure
                 elif os.getcwd()[-2] not in ('p2','p3'):
-                    shutil.copy(os.getcwd() + "\\" + reqfile[ii], os.getcwd() + '\\PyFiler\\' + reqfile[ii])
+                    shutil.copy(os.getcwd() + "/" + reqfile[ii], os.getcwd() + '/PyFiler/' + reqfile[ii])
                 else:
                     with open(PYFILER_LOG, "a") as a:
                         a.write('Error, look at line 54')
@@ -61,10 +61,10 @@ def PyFilerFileCheck (NEMSDIR, reqfile):
                         a.write('Dict/Varlist File location: ' + os.getcwd())
                 #Looking for dict.txt in PARNEMS Folder Structure
                 if os.getcwd()[-2:] == 'p1':
-                    shutil.copy(os.getcwd()+'\\input\\'+reqfile[ii],os.path.join(os.getcwd(),"..")+'\\PyFiler\\input\\'+reqfile[ii])
+                    shutil.copy(os.getcwd()+'/input/'+reqfile[ii],os.path.join(os.getcwd(),"..")+'/PyFiler/input/'+reqfile[ii])
                 #Looking for dict.txt in JOGNEMS Folder Structure
                 elif os.getcwd()[-2] not in ('p2','p3'):
-                    shutil.copy(os.getcwd() + '\\input\\' + reqfile[ii],os.getcwd() + '\\PyFiler\\input\\' + reqfile[ii])
+                    shutil.copy(os.getcwd() + '/input/' + reqfile[ii],os.getcwd() + '/PyFiler/input/' + reqfile[ii])
                 else:
                     with open(PYFILER_LOG, "a") as a:
                         a.write('Error, look at line 61')

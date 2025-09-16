@@ -461,7 +461,7 @@ class Canada(sub.Submodule):
 
                 #Output Canada wells
                 if self.parent.debug_switch == 1:
-                    self.can_wells.to_csv(self.output_path + 'module_results_debug//' + 'hsm_can_wells_debug.csv')
+                    self.can_wells.to_csv(self.output_path + 'module_results_debug/' + 'hsm_can_wells_debug.csv')
 
             pass
 
@@ -544,7 +544,7 @@ class Canada(sub.Submodule):
         self.na_prod[self.rest_curcalyr] = self.na_prod[self.rest_curcalyr].fillna(0)
         # Output Drilling Debug
         if self.parent.debug_switch == 1:
-            self.na_prod.to_csv(self.output_path + 'module_results_debug//' + 'hsm_can_drill_debug.csv')
+            self.na_prod.to_csv(self.output_path + 'module_results_debug/' + 'hsm_can_drill_debug.csv')
 
 
         ###Assign production to summed variables and convert to restart file format
@@ -677,8 +677,8 @@ class Canada(sub.Submodule):
         """
         ### Export dataframes to csv
         if self.parent.debug_switch == 1:
-            self.na_prod_sum.to_csv(self.output_path + 'module_results_debug//' + 'hsm_can_na_prod.csv')
-            self.ad_prod.to_csv(self.output_path + 'module_results_debug//' + 'hsm_can_ad_prod.csv')
+            self.na_prod_sum.to_csv(self.output_path + 'module_results_debug/' + 'hsm_can_na_prod.csv')
+            self.ad_prod.to_csv(self.output_path + 'module_results_debug/' + 'hsm_can_ad_prod.csv')
 
         if self.rest_curcalyr >= self.parent.steo_years[0]:
 

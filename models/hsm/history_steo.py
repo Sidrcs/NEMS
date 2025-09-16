@@ -156,7 +156,7 @@ class hist_steo(sub.Submodule):
         super().__init__(parent, submodule_name='hist_steo')
 
         #History Variables
-        self.hist_rfqtdcrd      = pd.DataFrame()  # HISTORICAL DOMESTIC CRUDE OIL PROD INCLUDING EOR
+        self.hist_rfqtdcrd      = pd.DataFrame()  # HISTORICAL DOMESTIC CRUDE OIL PROD INCLUDING EOR AS A RATIO FOR EACH ANALYSIS FOR HSM REGION ?
         self.hist_ogqshloil     = pd.DataFrame()  # HISTORICAL TIGHT OIL PRODUCTION FOR SELECT PLAYS
         self.hist_ogqshlgas     = pd.DataFrame()  # HISTORICAL SHALE GAS PRODUCTION FOR SELECT PLAYS
         self.hist_ngplprd       = pd.DataFrame()  # HISTORICAL NGPL PRODUCTION (MMB)

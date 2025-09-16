@@ -70,14 +70,14 @@ logger.info(sys.path)
 
 
 ###Add Pyfiler Paths
-sys.path.append(os.getcwd() + '\\Pyfiler')
-sys.path.append(os.getcwd() + '\\..\\Pyfiler')
-sys.path.append(os.getcwd() + '\\..\\..\\Pyfiler')
-sys.path.append(os.getcwd() + '\\..\\..\\scripts\\Pyfiler')
-sys.path.append(os.getcwd() + '\\..\\scripts\\Pyfiler')
+sys.path.append(os.path.join(os.getcwd(), 'Pyfiler'))
+sys.path.append(os.path.join(os.getcwd(), '/../Pyfiler'))
+sys.path.append(os.path.join(os.getcwd(), '/../../Pyfiler'))
+sys.path.append(os.path.join(os.getcwd(), '/../../scripts/Pyfiler'))
+sys.path.append(os.path.join(os.getcwd(), '/../scripts/Pyfiler'))
 
-sys.path.append(r"C:/Program Files (x86)/Intel/oneAPI/compiler/2023.2.1/windows/redist/intel64_win/compiler")
-os.add_dll_directory(r"C:/Program Files (x86)/Intel/oneAPI/compiler/2023.2.1/windows/redist/intel64_win/compiler")
+# sys.path.append(r"C:/Program Files (x86)/Intel/oneAPI/compiler/2023.2.1/windows/redist/intel64_win/compiler")
+# os.add_dll_directory(r"C:/Program Files (x86)/Intel/oneAPI/compiler/2023.2.1/windows/redist/intel64_win/compiler")
 
 logger.info('Log All System Paths')
 logger.info(sys.path)
@@ -153,9 +153,9 @@ def run_hsm(year, iteration, pyfiler1, cycle, scedes):
     hsm = module_unf.Module()
 
     #Path to main directories
-    standalone_directory = os.getcwd() + '\\'
-    integrated_directory = os.getcwd() + '\\'
-    integrated_input_path = standalone_directory + 'hsm\\input\\'
+    standalone_directory = os.getcwd() + '/'
+    integrated_directory = os.getcwd() + '/'
+    integrated_input_path = standalone_directory + 'hsm/input/'
 
     #Delete restart_HSMOUT.unf if it exists so NEMS bombs when there's a traceback
     hsm_out_exists = os.path.exists(integrated_directory + 'restart_HSMOUT.unf')
